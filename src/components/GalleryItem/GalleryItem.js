@@ -1,9 +1,9 @@
 import React from "react";
 import { Item, Image } from "./GalleryItem.styled";
 
-const GalleryItem = ({ src }) => {
+const GalleryItem = ({ src, onClick }) => {
   return (
-    <Item>
+    <Item onClick={onClick}>
       <Image src={src} alt="" />
     </Item>
   );

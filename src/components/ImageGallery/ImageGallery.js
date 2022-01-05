@@ -39,7 +39,11 @@ class ImageGallery extends Component {
       return (
         <List>
           {pictures.hits.map(({ id, webformatURL }) => (
-            <GalleryItem key={id} src={webformatURL} />
+            <GalleryItem
+              key={id}
+              src={webformatURL}
+              onClick={this.props.onClick}
+            />
           ))}
         </List>
       );
