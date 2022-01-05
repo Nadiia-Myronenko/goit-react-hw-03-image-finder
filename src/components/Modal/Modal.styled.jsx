@@ -14,9 +14,6 @@ export const ModalBackdrop = styled.div`
 `;
 
 export const ModalContent = styled.div`
-  max-width: calc(100vw - 48px);
-  max-height: calc(100vh - 24px);
-  width: 100px;
-  height: 100px;
-  background-color: #fff;
+  width: 750px;
+  overflow: auto;
 `;

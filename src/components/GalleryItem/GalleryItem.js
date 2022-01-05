@@ -1,10 +1,10 @@
 import React from "react";
 import { Item, Image } from "./GalleryItem.styled";
 
-const GalleryItem = ({ src, onClick }) => {
+const GalleryItem = ({ webformatURL, largeImageURL, onClick }) => {
   return (
-    <Item onClick={onClick}>
-      <Image src={src} alt="" />
+    <Item onClick={() => onClick(largeImageURL)}>
+      <Image src={webformatURL} alt="" />
     </Item>
   );
 };

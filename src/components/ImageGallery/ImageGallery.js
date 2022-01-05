@@ -38,10 +38,11 @@ class ImageGallery extends Component {
     if (status === "resolved") {
       return (
         <List>
-          {pictures.hits.map(({ id, webformatURL }) => (
+          {pictures.hits.map(({ id, webformatURL, largeImageURL }) => (
             <GalleryItem
               key={id}
-              src={webformatURL}
+              webformatURL={webformatURL}
+              largeImageURL={largeImageURL}
               onClick={this.props.onClick}
             />
           ))}
