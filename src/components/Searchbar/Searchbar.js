@@ -1,6 +1,8 @@
 import { Component } from "react";
 
 import { HiOutlineSearch } from "react-icons/hi";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   SearchBar,
   SearchForm,
@@ -18,7 +20,7 @@ class Searchbar extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     if (this.state.keyWord.trim() === "") {
-      alert(" Enter something!");
+      toast.warn(" Enter something!");
       return;
     }
     this.props.onSubmit(this.state.keyWord);
