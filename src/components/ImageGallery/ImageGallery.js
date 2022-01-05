@@ -1,7 +1,9 @@
 import React from "react";
 import { Component } from "react";
+
 import { List, Message } from "./ImageGallery.styled";
 import GalleryItem from "../GalleryItem/GalleryItem";
+import Loader from "../Loader/Loader";
 
 class ImageGallery extends Component {
   state = {
@@ -31,7 +33,7 @@ class ImageGallery extends Component {
       return <Message>Enter key word for image search!</Message>;
     }
     if (status === "pending") {
-      return <p>Загружаем...</p>;
+      return <Loader />;
     }
     if (status === "resolved") {
       return (
