@@ -1,5 +1,6 @@
 import React from "react";
 import { Item, Image } from "./GalleryItem.styled";
+import PropTypes from "prop-types";
 
 const GalleryItem = ({ webformatURL, largeImageURL, onClick }) => {
   return (
@@ -9,3 +10,9 @@ const GalleryItem = ({ webformatURL, largeImageURL, onClick }) => {
   );
 };
 export default GalleryItem;
+
+GalleryItem.propTypes = {
+  webformatURL: PropTypes.string,
+  largeImageURL: PropTypes.string,
+  onClick: PropTypes.func,
+};
