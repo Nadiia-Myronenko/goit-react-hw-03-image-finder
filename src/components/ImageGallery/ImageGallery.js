@@ -86,7 +86,7 @@ class ImageGallery extends Component {
           {!this.state.allLoaded && (
             <ButtonWrapper>
               <Button type="button" onClick={this.onLoadMoreClick}>
-                More
+                Load more...
               </Button>
             </ButtonWrapper>
           )}
