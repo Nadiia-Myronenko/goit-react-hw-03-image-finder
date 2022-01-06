@@ -1,9 +1,8 @@
 import { Component } from "react";
 
-import { Wrapper, ButtonWrapper } from "./App.styled";
+import { Wrapper } from "./App.styled";
 import Searchbar from "./components/Searchbar/Searchbar";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
-import Button from "./components/Button/Button";
 import Modal from "./components/Modal/Modal";
 
 import { ToastContainer } from "react-toastify";
@@ -31,9 +30,7 @@ class App extends Component {
       <Wrapper>
         <Searchbar onSubmit={this.handleFormSubmit} />
         <ImageGallery keyWord={this.state.keyWord} onClick={this.onImgClick} />
-        <ButtonWrapper>
-          <Button>More</Button>
-        </ButtonWrapper>
+
         {this.state.showModal && (
           <Modal onClose={this.toggleModal}>
             <img

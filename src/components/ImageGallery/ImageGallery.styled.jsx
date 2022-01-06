@@ -16,3 +16,8 @@ export const Message = styled.p`
   text-align: center;
   padding-top: 20px;
 `;
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+`;
