@@ -25,7 +25,6 @@ class ImageGallery extends Component {
       this.newsApiService
         .fetchArticles()
         .then((data) => {
-          console.log(data.hits);
           if (data.total) {
             this.setState({ pictures: data.hits, status: "resolved" });
             if (data.total === this.state.pictures.length) {
@@ -48,7 +47,6 @@ class ImageGallery extends Component {
           if (data.total === this.state.pictures.length) {
             this.setState({ allLoaded: true });
           }
-          console.log(data.hits);
           this.setState((prevState) => ({
             pictures: [...prevState.pictures, ...data.hits],
           }));
@@ -58,7 +56,6 @@ class ImageGallery extends Component {
   };
   render() {
     const { pictures, error, status } = this.state;
-    console.log(this.state.allLoaded);
     if (status === "idle") {
       return <Message>Enter key word for image search!</Message>;
     }
