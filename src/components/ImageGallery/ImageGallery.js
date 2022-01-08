@@ -5,6 +5,7 @@ import { List, Message, ButtonWrapper } from "./ImageGallery.styled";
 import GalleryItem from "../GalleryItem/GalleryItem";
 import Loader from "../Loader/Loader";
 import { Button } from "../Button/Button.styled";
+import NewsApiService from "../../services/api";
 
 class ImageGallery extends Component {
   state = {
@@ -12,21 +13,20 @@ class ImageGallery extends Component {
     allLoaded: false,
     error: null,
     status: "idle",
-    page: 1,
   };
+  newsApiService = new NewsApiService();
 
   componentDidUpdate(prevProps, prevState) {
+    this.newsApiService.query = this.props.keyWord;
     if (prevProps.keyWord !== this.props.keyWord) {
-      console.log(`Это componentDidUpdate. page: `, this.state);
-      this.setState({ status: "pending", allLoaded: false, page: 1 });
-      console.log(`Это componentDidUpdate. page: `, this.state);
-
-      this.fetchPictures()
+      this.setState({ status: "pending", allLoaded: false });
+      this.newsApiService.resetPage();
+      this.newsApiService.query = this.props.keyWord;
+      this.newsApiService
+        .fetchArticles()
         .then((data) => {
+          console.log(data.hits);
           if (data.total) {
-            this.incrementPage();
-            console.log(`Это componentDidUpdate. page: `, this.state);
-            console.log("страница", this.state.page);
             this.setState({ pictures: data.hits, status: "resolved" });
             if (data.total === this.state.pictures.length) {
               this.setState({ allLoaded: true });
@@ -39,20 +39,11 @@ class ImageGallery extends Component {
         .catch((error) => this.setState({ error, status: "rejected" }));
     }
   }
-  fetchPictures = () => {
-    console.log(`Это fetch. page: `, this.state);
-    return fetch(
-      `https://pixabay.com/api/?q=${this.props.keyWord}&page=${this.state.page}&key=24183605-bf7aca68d7e367c79bb8460cd&image_type=photo&orientation=horizontal&per_page=12`
-    ).then((res) => res.json());
-  };
-  incrementPage = () => {
-    this.setState((prevState) => ({ page: prevState.page + 1 }));
-  };
+
   onLoadMoreClick = () => {
-    console.log("вызвалась функция onLoadMoreClick");
-    this.incrementPage();
     if (!this.state.allLoaded) {
-      this.fetchPictures()
+      this.newsApiService
+        .fetchArticles()
         .then((data) => {
           if (data.total === this.state.pictures.length) {
             this.setState({ allLoaded: true });
@@ -78,7 +69,7 @@ class ImageGallery extends Component {
       return (
         <>
           <List>
-            {pictures.map(({ id, webformatURL, largeImageURL }, index) => (
+            {pictures.map(({ webformatURL, largeImageURL }, index) => (
               <GalleryItem
                 key={index}
                 webformatURL={webformatURL}
